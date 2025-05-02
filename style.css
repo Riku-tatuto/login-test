@@ -130,3 +130,47 @@ button.sns {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   z-index: 1000;
 }
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  height: 56px;
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+
+.menu {
+  display: flex;
+  margin-left: auto;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #333;
+  padding: 0 12px;
+  line-height: 56px;
+}
+
+.menu a:hover {
+  background-color: #f2f2f2;
+}
+
+.toggle-button {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  margin-left: auto;
+}
+
+.content {
+  padding-top: 56px;
+}
