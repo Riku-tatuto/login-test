@@ -1,52 +1,11 @@
+// index.html
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ホーム / test-login</title>
   <link rel="stylesheet" href="style.css">
-  <!-- Firebase SDKs -->
-  <script type="module">
-    // Import the functions you need from the SDKs
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
-
-    // Your Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyC7YbZqGoXHXt_PAczz7WKuTI6QCpJPcQM",
-      authDomain: "test-login-db.firebaseapp.com",
-      projectId: "test-login-db",
-      storageBucket: "test-login-db.firebasestorage.app",
-      messagingSenderId: "938432495254",
-      appId: "1:938432495254:web:c84375f17a3c7e7ae18cb7"
-    };
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    // Login form handling
-    window.addEventListener('DOMContentLoaded', () => {
-      const loginForm = document.getElementById('login-form');
-      loginForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        try {
-          const userCredential = await signInWithEmailAndPassword(auth, email, password);
-          // ログイン成功
-          console.log('Logged in user:', userCredential.user);
-          // ホームページへリダイレクト
-          window.location.href = 'home.html';
-        } catch (error) {
-          console.error('Login error:', error);
-          const errorMsg = document.getElementById('error-message');
-          errorMsg.textContent = error.message;
-          errorMsg.style.display = 'block';
-        }
-      });
-    });
-  </script>
+  <title>ホーム / test-login</title>
 </head>
 <body>
 
@@ -60,7 +19,6 @@
       <button class="toggle-button">☰</button>
     </div>
   </header>
-
   <main class="content">
     <p>ここはログインのテストページです。</p>
     <form id="login-form">
@@ -77,5 +35,7 @@
     </form>
   </main>
 
+  <!-- 外部JSを読み込む -->
+  <script type="module" src="app.js"></script>
 </body>
 </html>
