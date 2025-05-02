@@ -19,6 +19,7 @@ body {
   height: 400px;
   background: #fff;
   box-shadow: 0 2px 4px #4b4b4b;
+  border-radius: 20px;
 }
 
 .left-box {
@@ -34,7 +35,6 @@ body {
 h1 {
   margin-top: 0;
   margin-bottom: 20px;
-  font-weight: 300;
   font-size: 28px;
 }
 
@@ -80,6 +80,7 @@ input[type="submit"]:hover {
   background-image: url(./img/login-bg-img.jpg);
   background-size: cover;
   background-position: center;
+  border-radius: 0px 20px 20px 0px;
 }
 
 .right-box,
