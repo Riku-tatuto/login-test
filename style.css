@@ -12,6 +12,8 @@ body {
   font-weight: 300;
 }
 
+/* ログインのスタイル */
+
 #login-box {
   position: relative;
   margin: 5% auto;
@@ -94,6 +96,8 @@ input[type="submit"]:hover {
   text-shadow: 0 2px 4px #4b4b4b;
 }
 
+/* SNSで登録ボタン */
+
 button.sns {
   margin-bottom: 20px;
   width: 220px;
@@ -114,4 +118,15 @@ button.sns {
 }
 .google {
   background-color: #dd4b39;
+}
+
+/* メニューバー */
+
+.top-nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 1000;
 }
