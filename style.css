@@ -77,7 +77,7 @@ input[type="submit"]:hover {
   padding: 40px;
   width: 300px;
   height: 400px;
-  background-image: url(./bg.jpg);
+  background-image: url(./img/login-bg-img.jpg);
   background-size: cover;
   background-position: center;
 }
