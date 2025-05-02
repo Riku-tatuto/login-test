@@ -1,45 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>ログインフォーム</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <header class="top-nav">
-      <div class="nav-container">
-        <a href="#" class="logo">test-login</a>
-        <nav class="menu">
-          <a href="#">ホーム</a>
-          <a href="#">ログイン</a>
-        </nav>
-        <button class="toggle-button">☰</button>
-      </div>
-    </header>
-    <div id="login-box">
-      <div class="left-box">
-        <h1>ログイン</h1>
-        <input type="text" name="username" placeholder="ユーザー名" />
-        <input type="text" name="email" placeholder="メールアドレス" />
-        <input type="password" name="password" placeholder="パスワード" />
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ホーム / test-login</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Firebase SDKs -->
+  <script type="module">
+    // Import the functions you need from the SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
 
-        <input
-          type="password"
-          name="comfirmedPassword"
-          placeholder="確認用パスワード"
-        />
+    // Your Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyC7YbZqGoXHXt_PAczz7WKuTI6QCpJPcQM",
+      authDomain: "test-login-db.firebaseapp.com",
+      projectId: "test-login-db",
+      storageBucket: "test-login-db.firebasestorage.app",
+      messagingSenderId: "938432495254",
+      appId: "1:938432495254:web:c84375f17a3c7e7ae18cb7"
+    };
 
-        <input type="submit" name="login-button" value="ログイン" />
-      </div>
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
-      <div class="right-box">
-        <span class="loginwith">SNSでログイン</span>
-        <button class="sns facebook">FaceBookでログイン</button>
-        <button class="sns twitter">Twitterでログイン</button>
-        <button class="sns google">Googleでログイン</button>
-      </div>
-      <!-- <div class="or">または</div> -->
+    // Login form handling
+    window.addEventListener('DOMContentLoaded', () => {
+      const loginForm = document.getElementById('login-form');
+      loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        try {
+          const userCredential = await signInWithEmailAndPassword(auth, email, password);
+          // ログイン成功
+          console.log('Logged in user:', userCredential.user);
+          // ホームページへリダイレクト
+          window.location.href = 'home.html';
+        } catch (error) {
+          console.error('Login error:', error);
+          const errorMsg = document.getElementById('error-message');
+          errorMsg.textContent = error.message;
+          errorMsg.style.display = 'block';
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+
+  <header class="top-nav">
+    <div class="nav-container">
+      <a href="#" class="logo">test-login</a>
+      <nav class="menu">
+        <a href="#">ホーム</a>
+        <a href="#">ログイン</a>
+      </nav>
+      <button class="toggle-button">☰</button>
     </div>
-    　
-  </body>
+  </header>
+
+  <main class="content">
+    <p>ここはログインのテストページです。</p>
+    <form id="login-form">
+      <div>
+        <label for="email">メールアドレス</label>
+        <input type="email" id="email" required>
+      </div>
+      <div>
+        <label for="password">パスワード</label>
+        <input type="password" id="password" required>
+      </div>
+      <div id="error-message" style="display:none; color:red;"></div>
+      <button type="submit">ログイン</button>
+    </form>
+  </main>
+
+</body>
 </html>
