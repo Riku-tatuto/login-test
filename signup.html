@@ -10,6 +10,21 @@
     <link rel="icon" href="favicon.ico" />
   </head>
   <body>
+    <header class="top-nav">
+      <div class="nav-container">
+        <a href="#" class="logo">test-login</a>
+        <nav class="menu">
+          <a href="#">ホーム</a>
+          <div class="account-dropdown">
+            <button id="account-btn">ログイン</button>
+            <div class="dropdown-content">
+              <a href="#" id="logout-btn">ログアウト</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
     <div id="signup-box">
       <div class="left-box">
         <h1>アカウント作成</h1>
@@ -17,7 +32,7 @@
         <input type="password" id="signup-password" placeholder="パスワード" />
         <input type="password" id="signup-confirm" placeholder="パスワード（確認用）" />
         <input type="submit" id="signup-button" value="作成" />
-        <button id="goto-login">ログイン画面へ戻る</button>
+        <button id="goto-login" class="link-button">ログイン画面へ戻る</button>
       </div>
     </div>
     <script>
