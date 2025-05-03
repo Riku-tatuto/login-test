@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <title>ログインフォーム</title>
     <link rel="stylesheet" href="style.css" />
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js"></script>
+    <!-- ログイン処理用スクリプト -->
+    <script type="module" src="login.js"></script>
   </head>
   <body>
     <header class="top-nav">
@@ -19,27 +24,18 @@
     <div id="login-box">
       <div class="left-box">
         <h1>ログイン</h1>
-        <input type="text" name="username" placeholder="ユーザー名" />
-        <input type="text" name="email" placeholder="メールアドレス" />
-        <input type="password" name="password" placeholder="パスワード" />
-
-        <input
-          type="password"
-          name="comfirmedPassword"
-          placeholder="確認用パスワード"
-        />
-
-        <input type="submit" name="login-button" value="ログイン" />
+        <!-- ユーザー名入力を削除 -->
+        <input type="text" name="email" id="email" placeholder="メールアドレス" />
+        <input type="password" name="password" id="password" placeholder="パスワード" />
+        <input type="submit" id="login-button" value="ログイン" />
       </div>
 
       <div class="right-box">
         <span class="loginwith">SNSでログイン</span>
-        <button class="sns facebook">FaceBookでログイン</button>
-        <button class="sns twitter">Twitterでログイン</button>
-        <button class="sns google">Googleでログイン</button>
+        <button class="sns facebook" id="facebook-login">FaceBookでログイン</button>
+        <button class="sns twitter" id="twitter-login">Twitterでログイン</button>
+        <button class="sns google" id="google-login">Googleでログイン</button>
       </div>
-      <!-- <div class="or">または</div> -->
     </div>
-    　
   </body>
 </html>
