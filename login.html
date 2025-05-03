@@ -1,25 +1,45 @@
 <!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <title>ホーム / test-login</title>
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ログインフォーム</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="top-nav">
+      <div class="nav-container">
+        <a href="#" class="logo">test-login</a>
+        <nav class="menu">
+          <a href="#">ホーム</a>
+          <a href="#">ログイン</a>
+        </nav>
+        <button class="toggle-button">☰</button>
+      </div>
+    </header>
+    <div id="login-box">
+      <div class="left-box">
+        <h1>ログイン</h1>
+        <input type="text" name="username" placeholder="ユーザー名" />
+        <input type="text" name="email" placeholder="メールアドレス" />
+        <input type="password" name="password" placeholder="パスワード" />
 
-  <header class="top-nav">
-    <div class="nav-container">
-      <a href="#" class="logo">test-login</a>
-      <nav class="menu">
-        <a href="#">ホーム</a>
-        <a href="#">ログイン</a>
-      </nav>
-      <button class="toggle-button">☰</button>
+        <input
+          type="password"
+          name="comfirmedPassword"
+          placeholder="確認用パスワード"
+        />
+
+        <input type="submit" name="login-button" value="ログイン" />
+      </div>
+
+      <div class="right-box">
+        <span class="loginwith">SNSでログイン</span>
+        <button class="sns facebook">FaceBookでログイン</button>
+        <button class="sns twitter">Twitterでログイン</button>
+        <button class="sns google">Googleでログイン</button>
+      </div>
+      <!-- <div class="or">または</div> -->
     </div>
-  </header>
-  <main class="content">
-    <p>ここはログインのテストページです。</p>
-  </main>
-</body>
+    　
+  </body>
 </html>
