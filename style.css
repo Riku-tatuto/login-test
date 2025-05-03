@@ -14,7 +14,8 @@ body {
 
 /* ログインのスタイル */
 
-#login-box {
+#login-box,
+#signup-box {
   position: relative;
   margin: 5% auto;
   width: 600px;
@@ -24,14 +25,14 @@ body {
   border-radius: 20px;
 }
 
+/* 左側フォーム領域 */
 .left-box {
-  /* background-color: orange; */
   position: absolute;
   top: 0;
   left: 0;
   padding: 40px;
   width: 300px;
-  height: 400px;
+  height: 100%;    /* 高さを親に合わせる */
 }
 
 h1 {
@@ -40,8 +41,10 @@ h1 {
   font-size: 28px;
 }
 
+/* input 全般 */
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="email"] {   /* 追加 */
   margin-bottom: 20px;
   padding: 4px;
   width: 220px;
@@ -71,18 +74,45 @@ input[type="submit"]:hover {
   background-color: #794b1d;
 }
 
+/* ドロップダウンメニュー */
+.account-dropdown {
+  position: relative;    /* 子の絶対配置基準 */
+}
+
+.dropdown-content {
+  display: none;         /* 初期は非表示 */
+  position: absolute;
+  top: 100%;             /* ボタンの下に */
+  right: 0;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 4px;
+  z-index: 10;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 8px 16px;
+  color: #333;
+  text-decoration: none;
+}
+
+.dropdown-content a:hover {
+  background: #f2f2f2;
+}
+
+/* 右側領域（ログインのみ） */
 .right-box {
-  /* background-color: green; */
   position: absolute;
   top: 0;
   right: 0;
   padding: 40px;
   width: 300px;
-  height: 400px;
+  height: 100%;
   background-image: url(./img/login-bg-img.jpg);
   background-size: cover;
   background-position: center;
-  border-radius: 0px 20px 20px 0px;
+  border-radius: 0 20px 20px 0;
 }
 
 .right-box,
