@@ -1,200 +1,235 @@
+/*------------------------------
+  style.css (リファクタリング版)
+------------------------------*/
+
+/*—— カスタムプロパティ ——*/
+:root {
+  /* カラー */
+  --bg-page: #efefef;
+  --text-primary: #777;
+  --btn-main: #9b6025;
+  --btn-main-hover: #794b1d;
+  --shadow-dark: rgba(0,0,0,0.3);
+  --shadow-light: rgba(0,0,0,0.1);
+
+  /* サイズ */
+  --form-width: 600px;
+  --form-height: 400px;
+  --box-width: 300px;
+  --padding-large: 40px;
+  --padding-base: 16px;
+  --input-height: 32px;
+  --btn-height: 36px;
+
+  /* タイポグラフィ */
+  --font-size-base: 16px;
+  --font-size-heading: 28px;
+  --font-size-sm: 14px;
+  --font-family: sans-serif;
+}
+
+/*—— リセット & ベーススタイル ——*/
 * {
   box-sizing: border-box;
 }
-
 body {
   margin: 0;
   padding: 0;
-  background: #efefef;
-  font-size: 16px;
-  color: #777;
-  font-family: sans-serif;
-  font-weight: 300;
+  background: var(--bg-page);
+  color: var(--text-primary);
+  font: 300 var(--font-size-base) var(--font-family);
 }
 
-/* ログインのスタイル */
-
+/*—— ログイン／サインアップ共通コンテナ ——*/
 #login-box,
 #signup-box {
   position: relative;
   margin: 5% auto;
-  width: 600px;
-  height: 400px;
+  width: var(--form-width);
+  height: var(--form-height);
   background: #fff;
-  box-shadow: 0 2px 4px #4b4b4b;
+  box-shadow: 0 2px 4px var(--shadow-dark);
   border-radius: 20px;
 }
 
-/* 左側フォーム領域 */
+/*—— 左側フォーム領域 ——*/
 .left-box {
   position: absolute;
   top: 0;
   left: 0;
-  padding: 40px;
-  width: 300px;
-  height: 100%;    /* 高さを親に合わせる */
+  width: var(--box-width);
+  height: 100%;
+  padding: var(--padding-large);
 }
 
+/* 見出し */
 h1 {
-  margin-top: 0;
-  margin-bottom: 20px;
-  font-size: 28px;
+  margin: 0 0 20px;
+  font-size: var(--font-size-heading);
 }
 
-/* input 全般 */
+/* テキスト入力系 */
 input[type="text"],
 input[type="password"],
-input[type="email"] {   /* 追加 */
+input[type="email"] {
+  display: block;
+  width: calc(var(--box-width) - 40px); /* パディング考慮 */
+  height: var(--input-height);
   margin-bottom: 20px;
   padding: 4px;
-  width: 220px;
-  height: 32px;
   border: none;
-  outline: none;
   border-bottom: 1px solid #aaa;
-  font-weight: 400;
-  font-size: 15px;
-  transition: 0.3s ease;
+  font: 400 15px var(--font-family);
+  transition: border-color 0.3s ease;
+}
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus {
+  border-bottom-color: var(--btn-main);
 }
 
+/* 送信ボタン */
 input[type="submit"] {
-  margin-bottom: 28px;
-  width: 120px;
-  height: 32px;
-  background-color: #9b6025;
+  width: 240px;
+  height: var(--btn-height);
+  margin-bottom: 20px;
+  background: var(--btn-main);
   border: none;
-  border-radius: 2px;
+  border-radius: 4px;
   color: #fff;
   font-weight: 500;
-  transition: 0.3s all;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+input[type="submit"]:hover {
+  background: var(--btn-main-hover);
+}
+
+/* リンク風ボタン */
+button.link-button {
+  display: block;
+  width: 240px;
+  height: var(--btn-height);
+  margin-bottom: 20px;
+  background: none;
+  border: none;
+  color: var(--btn-main);
+  font-size: var(--font-size-sm);
+  text-decoration: underline;
   cursor: pointer;
 }
 
-input[type="submit"]:hover {
-  background-color: #794b1d;
-}
-
-/* ドロップダウンメニュー */
-.account-dropdown {
-  position: relative;    /* 子の絶対配置基準 */
-}
-
-.dropdown-content {
-  display: none;         /* 初期は非表示 */
+/*—— 右側イメージ領域 ——*/
+.right-box {
   position: absolute;
-  top: 100%;             /* ボタンの下に */
+  top: 0;
+  right: 0;
+  width: var(--box-width);
+  height: 100%;
+  padding: var(--padding-large);
+  background: url(./img/login-bg-img.jpg) center/cover no-repeat;
+  border-radius: 0 20px 20px 0;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 2px 4px var(--shadow-dark);
+}
+.right-box .loginwith {
+  display: block;
+  margin-bottom: 40px;
+  font-size: var(--font-size-heading);
+  font-weight: 600;
+}
+
+/* SNSログインボタン */
+button.sns {
+  display: block;
+  width: 220px;
+  height: var(--btn-height);
+  margin: 0 auto 20px;
+  border: none;
+  border-radius: 2px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+button.sns:hover {
+  opacity: 0.9;
+}
+/* Google ボタン */
+button.google {
+  background: #dd4b39;
+}
+
+/*—— ナビゲーションバー ——*/
+.top-nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 2px 4px var(--shadow-light);
+  z-index: 1000;
+}
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  height: 56px;
+  padding: 0 var(--padding-base);
+}
+/* ロゴ */
+.logo {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+}
+/* メニュー */
+.menu {
+  display: flex;
+  margin-left: auto;
+  align-items: center;
+}
+.menu a,
+.account-dropdown button {
+  padding: 0 12px;
+  line-height: 56px;
+  background: none;
+  border: none;
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
+}
+.menu a:hover,
+.account-dropdown button:hover {
+  background: #f2f2f2;
+}
+
+/* ドロップダウン */
+.account-dropdown {
+  position: relative;
+}
+.dropdown-content {
+  display: none; /* JSで制御 */
+  position: absolute;
+  top: 56px;
   right: 0;
   background: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px var(--shadow-light);
   border-radius: 4px;
   z-index: 10;
 }
-
 .dropdown-content a {
   display: block;
   padding: 8px 16px;
   color: #333;
   text-decoration: none;
 }
-
 .dropdown-content a:hover {
   background: #f2f2f2;
 }
 
-/* 右側領域（ログインのみ） */
-.right-box {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 40px;
-  width: 300px;
-  height: 100%;
-  background-image: url(./img/login-bg-img.jpg);
-  background-size: cover;
-  background-position: center;
-  border-radius: 0 20px 20px 0;
-}
-
-.right-box,
-.loginwith {
-  display: block;
-  margin-bottom: 40px;
-  font-size: 28px;
-  color: white;
-  font-weight: 600;
-  text-align: center;
-  text-shadow: 0 2px 4px #4b4b4b;
-}
-
-/* SNSで登録ボタン */
-
-button.sns {
-  margin-bottom: 20px;
-  width: 220px;
-  height: 36px;
-  border: none;
-  border-radius: 2px;
-  color: white;
-  font-weight: 500;
-  transition: 0.2s ease;
-  cursor: pointer;
-}
-
-.google {
-  background-color: #dd4b39;
-}
-
-/* メニューバー */
-
-.top-nav {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  z-index: 1000;
-}
-
-.nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  height: 56px;
-}
-
-.logo {
-  font-size: 1.25rem;
-  font-weight: bold;
-  text-decoration: none;
-  color: #333;
-}
-
-.menu {
-  display: flex;
-  margin-left: auto;
-}
-
-.menu a {
-  text-decoration: none;
-  color: #333;
-  padding: 0 12px;
-  line-height: 56px;
-}
-
-.menu a:hover {
-  background-color: #f2f2f2;
-}
-
-.toggle-button {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  margin-left: auto;
-}
-
+/*—— ページコンテンツ位置調整 ——*/
 .content {
-  padding-top: 56px;
+  padding-top: 56px; /* ナビバーの高さ分 */
 }
