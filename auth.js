@@ -1,9 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
 import {
   getAuth,
-  sendSignInLinkToEmail,
-  isSignInWithEmailLink,
-  signInWithEmailLink,
+  signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
   createUserWithEmailAndPassword,
@@ -11,35 +9,26 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
 
 // Firebase 初期化
-const firebaseConfig = { /* 省略 */ };
+const firebaseConfig = {
+  apiKey: "AIzaSyC7YbZqGoXHXt_PAczz7WKuTI6QCpJPcQM",
+  authDomain: "test-login-db.firebaseapp.com",
+  projectId: "test-login-db",
+  storageBucket: "test-login-db.firebasestorage.app",
+  messagingSenderId: "938432495254",
+  appId: "1:938432495254:web:c84375f17a3c7e7ae18cb7"
+};
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// メールリンク設定
-const actionCodeSettings = {
-  url: window.location.origin + '/home.html',
-  handleCodeInApp: true
-};
-
-// メールリンクログイン
+// メール/パスワードでログイン
 const loginBtn = document.getElementById('login-button');
 if (loginBtn) loginBtn.addEventListener('click', () => {
   const email = document.getElementById('email').value;
-  sendSignInLinkToEmail(auth, email, actionCodeSettings)
-    .then(() => {
-      localStorage.setItem('emailForSignIn', email);
-      alert('確認用リンクをメールに送りました');
-    })
+  const password = document.getElementById('password').value;
+  signInWithEmailAndPassword(auth, email, password)
+    .then(res => updateNav(res.user.email))
     .catch(e => alert(e.message));
 });
-
-// リンクからのサインイン
-if (isSignInWithEmailLink(auth, window.location.href)) {
-  let email = localStorage.getItem('emailForSignIn') || prompt('メールアドレスを入力してください');
-  signInWithEmailLink(auth, email, window.location.href)
-    .then(res => updateNav(res.user.email))
-    .catch(console.error);
-}
 
 // Google ログイン
 const googleBtn = document.getElementById('google-login');
@@ -72,12 +61,13 @@ if (logoutBtn) logoutBtn.addEventListener('click', () => {
 function updateNav(email) {
   const btn = document.getElementById('account-btn');
   btn.textContent = email;
-  document.getElementById('dropdown-content').style.display = 'block';
+  const dd = document.querySelector('.dropdown-content');
+  dd.style.display = 'block';
 }
 
 // ドロップダウン制御
 const accBtn = document.getElementById('account-btn');
 if (accBtn) accBtn.addEventListener('click', () => {
-  const d = document.getElementById('dropdown-content');
+  const d = document.querySelector('.dropdown-content');
   d.style.display = d.style.display === 'block' ? 'none' : 'block';
 });
