@@ -9,7 +9,6 @@
     <script type="module" src="https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js"></script>
     <!-- 認証ロジック -->
     <script type="module" src="auth.js"></script>
-    <!-- Faviconを指定（存在しない場合は用意する） -->
     <link rel="icon" href="favicon.ico" />
   </head>
   <body>
@@ -18,9 +17,9 @@
         <a href="#" class="logo">test-login</a>
         <nav class="menu">
           <a href="#">ホーム</a>
-          <div class="account-dropdown" id="account-dropdown">
+          <div class="account-dropdown">
             <button id="account-btn">ログイン</button>
-            <div class="dropdown-content" id="dropdown-content">
+            <div class="dropdown-content">
               <a href="#" id="logout-btn">ログアウト</a>
             </div>
           </div>
@@ -32,8 +31,9 @@
       <div class="left-box">
         <h1>ログイン</h1>
         <input type="email" id="email" placeholder="メールアドレス" />
-        <input type="submit" id="login-button" value="ログイン（メールリンク送信）" />
-        <button id="goto-signup">アカウントを新規作成</button>
+        <input type="password" id="password" placeholder="パスワード" />
+        <input type="submit" id="login-button" value="ログイン" />
+        <button id="goto-signup" class="link-button">アカウントを新規作成</button>
       </div>
       <div class="right-box">
         <span class="loginwith">SNSでログイン</span>
@@ -42,7 +42,6 @@
     </div>
 
     <script>
-      // サインアップ画面へ
       document.getElementById('goto-signup').addEventListener('click', () => {
         location.href = 'signup.html';
       });
