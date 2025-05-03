@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <title>アカウント作成</title>
     <link rel="stylesheet" href="style.css" />
-    <script src="https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js"></script>
     <script type="module" src="auth.js"></script>
+    <link rel="icon" href="favicon.ico" />
   </head>
   <body>
     <div id="signup-box">
       <div class="left-box">
         <h1>アカウント作成</h1>
-        <input type="text" id="signup-email" placeholder="メールアドレス" />
+        <input type="email" id="signup-email" placeholder="メールアドレス" />
         <input type="password" id="signup-password" placeholder="パスワード" />
         <input type="password" id="signup-confirm" placeholder="パスワード（確認用）" />
         <input type="submit" id="signup-button" value="作成" />
@@ -20,7 +21,7 @@
       </div>
     </div>
     <script>
-      document.getElementById('goto-login').addEventListener('click', ()=> location.href='index.html');
+      document.getElementById('goto-login').addEventListener('click', () => location.href = 'login.html');
     </script>
   </body>
 </html>
