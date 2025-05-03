@@ -1,5 +1,14 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
-import { getAuth, sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
+import {
+  getAuth,
+  sendSignInLinkToEmail,
+  isSignInWithEmailLink,
+  signInWithEmailLink,
+  GoogleAuthProvider,
+  signInWithPopup,
+  createUserWithEmailAndPassword,
+  signOut
+} from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
 
 // Firebase 初期化
 const firebaseConfig = { /* 省略 */ };
@@ -12,51 +21,51 @@ const actionCodeSettings = {
   handleCodeInApp: true
 };
 
-// ログインページ：メールリンク送信
+// メールリンクログイン
 const loginBtn = document.getElementById('login-button');
-if (loginBtn) loginBtn.addEventListener('click', ()=>{
+if (loginBtn) loginBtn.addEventListener('click', () => {
   const email = document.getElementById('email').value;
   sendSignInLinkToEmail(auth, email, actionCodeSettings)
-    .then(()=>{
-      window.localStorage.setItem('emailForSignIn', email);
+    .then(() => {
+      localStorage.setItem('emailForSignIn', email);
       alert('確認用リンクをメールに送りました');
-    }).catch(e=>alert(e.message));
+    })
+    .catch(e => alert(e.message));
 });
 
-// リンククリック後のサインイン完了
+// リンクからのサインイン
 if (isSignInWithEmailLink(auth, window.location.href)) {
-  let email = window.localStorage.getItem('emailForSignIn');
-  if (!email) email = window.prompt('メールアドレスを入力してください');
+  let email = localStorage.getItem('emailForSignIn') || prompt('メールアドレスを入力してください');
   signInWithEmailLink(auth, email, window.location.href)
-    .then(res=> updateNav(res.user.email))
-    .catch(e=>console.error(e));
+    .then(res => updateNav(res.user.email))
+    .catch(console.error);
 }
 
 // Google ログイン
 const googleBtn = document.getElementById('google-login');
-if (googleBtn) googleBtn.addEventListener('click', ()=>{
+if (googleBtn) googleBtn.addEventListener('click', () => {
   const provider = new GoogleAuthProvider();
   signInWithPopup(auth, provider)
-    .then(res=> updateNav(res.user.email))
-    .catch(e=>alert(e.message));
+    .then(res => updateNav(res.user.email))
+    .catch(e => alert(e.message));
 });
 
 // サインアップ
 const signupBtn = document.getElementById('signup-button');
-if (signupBtn) signupBtn.addEventListener('click', ()=>{
+if (signupBtn) signupBtn.addEventListener('click', () => {
   const email = document.getElementById('signup-email').value;
   const pass = document.getElementById('signup-password').value;
   const conf = document.getElementById('signup-confirm').value;
   if (pass !== conf) return alert('パスワードが一致しません');
   createUserWithEmailAndPassword(auth, email, pass)
-    .then(res=> updateNav(res.user.email))
-    .catch(e=>alert(e.message));
+    .then(res => updateNav(res.user.email))
+    .catch(e => alert(e.message));
 });
 
 // ログアウト
 const logoutBtn = document.getElementById('logout-btn');
-if (logoutBtn) logoutBtn.addEventListener('click', ()=>{
-  signOut(auth).then(()=> location.href='index.html');
+if (logoutBtn) logoutBtn.addEventListener('click', () => {
+  signOut(auth).then(() => location.href = 'login.html');
 });
 
 // ナビバー更新
@@ -66,9 +75,9 @@ function updateNav(email) {
   document.getElementById('dropdown-content').style.display = 'block';
 }
 
-// ドロップダウン表示制御
+// ドロップダウン制御
 const accBtn = document.getElementById('account-btn');
-if (accBtn) accBtn.addEventListener('click', ()=>{
+if (accBtn) accBtn.addEventListener('click', () => {
   const d = document.getElementById('dropdown-content');
-  d.style.display = d.style.display==='block'? 'none':'block';
+  d.style.display = d.style.display === 'block' ? 'none' : 'block';
 });
