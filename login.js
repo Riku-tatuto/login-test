@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, FacebookAuthProvider, TwitterAuthProvider, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
 
-// 1. Firebase 初期化
+// Firebase 初期化
 const firebaseConfig = {
   apiKey: "AIzaSyC7YbZqGoXHXt_PAczz7WKuTI6QCpJPcQM",
   authDomain: "test-login-db.firebaseapp.com",
@@ -13,16 +13,15 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// 2. メール/パスワードでログイン
+// メール/パスワードでログイン
 const loginButton = document.getElementById("login-button");
 loginButton.addEventListener("click", () => {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
   signInWithEmailAndPassword(auth, email, password)
     .then(userCredential => {
-      // ログイン成功
       console.log("ログイン成功", userCredential.user);
-      location.href = "home.html"; // ホームページへ遷移
+      location.href = "home.html";
     })
     .catch(error => {
       console.error("ログイン失敗", error);
@@ -30,22 +29,17 @@ loginButton.addEventListener("click", () => {
     });
 });
 
-// 3. SNSログイン（Google, Facebook, Twitter）
-const providers = {
-  google: new GoogleAuthProvider(),
-  facebook: new FacebookAuthProvider(),
-  twitter: new TwitterAuthProvider()
-};
-["google", "facebook", "twitter"].forEach(provider => {
-  document.getElementById(`${provider}-login`).addEventListener("click", () => {
-    signInWithPopup(auth, providers[provider])
-      .then(result => {
-        console.log(`${provider}ログイン成功`, result.user);
-        location.href = "home.html";
-      })
-      .catch(error => {
-        console.error(`${provider}ログイン失敗`, error);
-        alert(`${provider}ログインに失敗しました: ` + error.message);
-      });
-  });
+// Googleログインのみ
+const googleProvider = new GoogleAuthProvider();
+const googleButton = document.getElementById("google-login");
+googleButton.addEventListener("click", () => {
+  signInWithPopup(auth, googleProvider)
+    .then(result => {
+      console.log("Googleログイン成功", result.user);
+      location.href = "home.html";
+    })
+    .catch(error => {
+      console.error("Googleログイン失敗", error);
+      alert("Googleログインに失敗しました: " + error.message);
+    });
 });
