@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <title>ログインフォーム</title>
     <link rel="stylesheet" href="style.css" />
-    <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js"></script>
-    <!-- ログイン処理用スクリプト -->
-    <script type="module" src="login.js"></script>
+    <!-- Firebase SDK はモジュールとして読み込む -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js"></script>
+    <!-- 認証ロジック -->
+    <script type="module" src="auth.js"></script>
+    <!-- Faviconを指定（存在しない場合は用意する） -->
+    <link rel="icon" href="favicon.ico" />
   </head>
   <body>
     <header class="top-nav">
@@ -16,24 +18,34 @@
         <a href="#" class="logo">test-login</a>
         <nav class="menu">
           <a href="#">ホーム</a>
-          <a href="#">ログイン</a>
+          <div class="account-dropdown" id="account-dropdown">
+            <button id="account-btn">ログイン</button>
+            <div class="dropdown-content" id="dropdown-content">
+              <a href="#" id="logout-btn">ログアウト</a>
+            </div>
+          </div>
         </nav>
-        <button class="toggle-button">☰</button>
       </div>
     </header>
+
     <div id="login-box">
       <div class="left-box">
         <h1>ログイン</h1>
-        <input type="text" name="email" id="email" placeholder="メールアドレス" />
-        <input type="password" name="password" id="password" placeholder="パスワード" />
-        <input type="submit" id="login-button" value="ログイン" />
+        <input type="email" id="email" placeholder="メールアドレス" />
+        <input type="submit" id="login-button" value="ログイン（メールリンク送信）" />
+        <button id="goto-signup">アカウントを新規作成</button>
       </div>
-
       <div class="right-box">
         <span class="loginwith">SNSでログイン</span>
-        <!-- Googleログインのみ -->
         <button class="sns google" id="google-login">Googleでログイン</button>
       </div>
     </div>
+
+    <script>
+      // サインアップ画面へ
+      document.getElementById('goto-signup').addEventListener('click', () => {
+        location.href = 'signup.html';
+      });
+    </script>
   </body>
 </html>
